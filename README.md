@@ -29,5 +29,5 @@ A **real-time email content analysis tool** that simulates spam detection using 
 
 1. Clone the repository:
    ```bash
-   git clone 
+   git clone https://github.com/Shikha18Shukla/Spam_email_detector/tree/main
 
