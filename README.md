@@ -31,3 +31,14 @@ A **real-time email content analysis tool** that simulates spam detection using 
    ```bash
    git clone https://github.com/Shikha18Shukla/Spam_email_detector/tree/main
 
+
+
+##Frontend :
+<img width="1366" height="768" alt="Code_1EHTy1m3g0" src="https://github.com/user-attachments/assets/9b0a75ca-65b5-47bf-985d-b889be893cb1" />
+<img width="1366" height="768" alt="brave_jNTQQQk7c3" src="https://github.com/user-attachments/assets/f392fc81-3644-40c3-bf71-bb91dde75bb0" />
+<img width="1366" height="768" alt="brave_fNoBW1gX2I" src="https://github.com/user-attachments/assets/6bfdfc38-eb53-422f-b030-7f1671ad9764" />
+<img width="1366" height="768" alt="brave_5XnZ2kcKhV" src="https://github.com/user-attachments/assets/bffa3c14-2afa-48f6-9179-4307a85bc05c" />
+7_1a5fd76b](https://github.com/user-attachments/assets/2264a5e8-9d03-45cf-9b9a-9a6fd6bbcfbc)
+
+
+
