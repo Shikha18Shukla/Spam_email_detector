@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureMail Analyzer - Email Content Verification</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-dark': '#1e3a8a',
+                        'primary-light': '#3b82f6',
+                        'accent-teal': '#14b8a6',
+                        'accent-dark': '#0f766e',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f9;
+        }
+        .header-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.06);
+        }
+        #verification-result {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transform: translateY(10px);
+        }
+        #verification-result.show {
+            max-height: 600px;
+            opacity: 1;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            transform: translateY(0);
+        }
+        textarea { resize: vertical; }
+    </style>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header id="main-header" class="fixed top-0 left-0 w-full bg-primary-dark text-white p-4 z-50 header-shadow">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold tracking-tight">SecureMail<span class="text-accent-teal">.io</span></h1>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="#hero" class="hover:text-accent-teal transition duration-200">Home</a>
+                <a href="#verification-section" class="hover:text-accent-teal transition duration-200">Analyze Content</a>
+                <a href="#features" class="hover:text-accent-teal transition duration-200">Features</a>
+                <a href="#contact" class="hover:text-accent-teal transition duration-200">Contact</a>
+            </nav>
+            <button class="md:hidden p-2 rounded-md hover:bg-primary-light transition duration-200" onclick="toggleMobileMenu()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu">
+                    <line x1="4" y1="6" x2="20" y2="6"/>
+                    <line x1="4" y1="12" x2="20" y2="12"/>
+                    <line x1="4" y1="18" x2="20" y2="18"/>
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden mt-4 text-center space-y-3">
+            <a href="#hero" class="block py-2 hover:bg-primary-light rounded-md transition duration-200" onclick="toggleMobileMenu()">Home</a>
+            <a href="#verification-section" class="block py-2 hover:bg-primary-light rounded-md transition duration-200" onclick="toggleMobileMenu()">Analyze Content</a>
+            <a href="#features" class="block py-2 hover:bg-primary-light rounded-md transition duration-200" onclick="toggleMobileMenu()">Features</a>
+            <a href="#contact" class="block py-2 hover:bg-primary-light rounded-md transition duration-200" onclick="toggleMobileMenu()">Contact</a>
+        </div>
+    </header>
+
+    <div class="pt-16"></div>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="relative bg-primary-dark pt-12 pb-24 lg:pt-24 lg:pb-40 overflow-hidden">
+            <div class="absolute inset-0 opacity-10 bg-repeat-x" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect fill="%231e3a8a" width="100" height="100"/><path fill="rgba(255,255,255,0.1)" d="M0 0h50v50H0zM50 50h50v50H50z"/></svg>');"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
+                <p class="text-accent-teal font-semibold text-lg mb-4 italic">"Security starts with content. Trust requires analysis."</p>
+                <h2 class="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-6">
+                    Real-Time <span class="text-accent-teal">Email Content Analysis</span>. <br> Protect Your Inbox.
+                </h2>
+                <p class="text-xl text-indigo-200 mb-10 max-w-3xl mx-auto">
+                    Use our proprietary machine learning model to instantly classify email content as Spam or Legitimate (Ham).
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#verification-section" class="px-8 py-3 bg-accent-teal text-white text-lg font-semibold rounded-full shadow-lg hover:bg-accent-dark transition duration-300 transform hover:scale-105">Start Content Analysis</a>
+                    <a href="#features" class="px-8 py-3 bg-primary-light text-white text-lg font-semibold rounded-full shadow-lg hover:bg-indigo-400 transition duration-300 transform hover:scale-105">Learn About Our Model</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Verification Section -->
+        <section id="verification-section" class="-mt-20 pt-16 pb-24 z-20 relative">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="bg-white p-6 sm:p-10 rounded-xl shadow-2xl border border-gray-100">
+                    <h3 class="text-3xl font-bold text-primary-dark mb-6 text-center">Test Our Live Spam Detector</h3>
+                    <form id="email-verification-form" class="space-y-6" onsubmit="handleVerification(event)">
+                        <label for="email-content-input" class="block text-lg font-medium text-gray-700">Paste Email Body for Analysis</label>
+                        <textarea id="email-content-input" rows="6" placeholder="Example: 'Congratulations! You have won a $1,000,000 cash prize. Click the link below immediately to claim your funds...'" required class="w-full p-4 border border-gray-300 rounded-lg focus:ring-accent-teal focus:border-accent-teal text-base"></textarea>
+                        <button type="submit" id="verify-button" class="w-full px-8 py-4 bg-primary-dark text-white text-lg font-semibold rounded-lg shadow-md hover:bg-primary-light transition duration-300 flex items-center justify-center disabled:opacity-50">
+                            <span id="button-text">Analyze Content</span>
+                            <div id="loading-spinner" class="hidden w-5 h-5 border-2 border-white border-t-2 border-t-transparent rounded-full animate-spin ml-2"></div>
+                        </button>
+                    </form>
+                    <div id="verification-result" class="rounded-xl mt-4 text-left shadow-lg"></div>
+
+                    <div id="message-box" class="hidden fixed inset-0 bg-gray-900 bg-opacity-75 z-[100] items-center justify-center">
+                        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-sm w-full text-center">
+                            <h4 id="message-title" class="text-xl font-bold mb-4 text-primary-dark"></h4>
+                            <p id="message-content" class="text-gray-700 mb-6"></p>
+                            <button onclick="closeMessageBox()" class="px-6 py-2 bg-accent-teal text-white rounded-md hover:bg-accent-dark transition duration-200">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-accent-teal font-semibold uppercase tracking-wider">Our Technology</span>
+                    <h2 class="mt-2 text-4xl font-extrabold text-gray-900 sm:text-5xl">How We Detect Malicious Content</h2>
+                    <p class="mt-4 text-xl text-gray-500 max-w-3xl mx-auto">
+                        We use a trained machine learning model (simulated here) on a massive corpus of emails for high-accuracy classification.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <!-- Feature Cards -->
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 border-t-4 border-accent-teal">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-accent-teal text-white mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-git-branch-plus"><path d="M6 3v12"/><path d="M18 9c-3.1 0-7 1.4-7 5"/><path d="M18 15v6"/><path d="M3 15h6"/><path d="M15 9h6"/><path d="M18 22v-2"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">TF-IDF Vectorization</h3>
+                        <p class="text-gray-600">We analyze the relative importance of words and phrases (n-grams) to identify suspicious linguistic patterns typical of spam.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 border-t-4 border-primary-light">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-primary-light text-white mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bot"><path d="M12 8V4"/><path d="M8 4h8"/><path d="M12 2v2"/><path d="M16 4h4c1.1 0 2 .9 2 2v10c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2h4"/><path d="M14 11l-2 2-2-2"/><path d="M12 18v-2"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Ensemble of Algorithms</h3>
+                        <p class="text-gray-600">We test and deploy the most effective model from a pipeline including Linear SVC, Logistic Regression, and Naive Bayes.</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:-translate-y-1 border-t-4 border-accent-teal">
+                        <div class="flex items-center justify-center h-12 w-12 rounded-md bg-accent-teal text-white mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cpu"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M20 15h2"/><path d="M15 4h.01"/><path d="M15 20h.01"/><path d="M4 15h.01"/><path d="M20 15h.01"/></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-3">Pre-processing and Cleaning</h3>
+                        <p class="text-gray-600">Our text is cleaned by removing URLs, emails, HTML entities, and normalizing case before feature extraction.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 border-b border-gray-700 pb-8 mb-8">
+                <div class="col-span-2 md:col-span-2">
+                    <h4 class="text-3xl font-extrabold tracking-tighter text-accent-teal mb-4">SecureMail<span class="text-white">.io</span></h4>
+                    <p class="text-sm text-gray-400">We provide content analysis tools based on machine learning. This service is for educational and protective use.</p>
+                </div>
+                <div>
+                    <h5 class="font-bold text-lg mb-4 text-primary-light">Product</h5>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition duration-200">API Documentation</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-200">Model Info</a></li>
+                        <li><a href="#verification-section" class="hover:text-white transition duration-200">Live Detector</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold text-lg mb-4 text-primary-light">Company</h5>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition duration-200">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-200">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-200">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-span-2 md:col-span-1">
+                    <h5 class="font-bold text-lg mb-4 text-primary-light">Resources</h5>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition duration-200">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition duration-200">Help Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p>&copy; <span id="current-year"></span> SecureMail.io. All rights reserved.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-primary-light transition duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-twitter"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C6 15.5 3 11 2 9c2.2.7 4.5 1 6-.2-1-.7-2-2-2-4-.5 0-1-.1-1.5-.2 2 .5 4.1 1.5 5.7 3.2C10 5.4 12.3 3 15 3c2.2 0 4.1 1 5.3 2.6C21.4 4.5 22 4 22 4z"/></svg>
+                    </a>
+                    <a href="#" class="hover:text-primary-light transition duration-200">
+                        <svg xmlns="http://www.w3.org/
