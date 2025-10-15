@@ -1,36 +1,86 @@
-# Spam_email_detector
-A real-time email content analysis tool that simulates spam detection using a keyword-based machine learning model. The web application allows users to paste email content and get an instant prediction of whether the email is spam or legitimate (ham). Built with HTML, Tailwind CSS, and JavaScript for the front-end and includes a mock ML simulation.
-# SecureMail Analyzer - Spam Email Detector
+🛡️ SecureMail Analyzer - Spam Email Detector
 
-A **real-time email content analysis tool** that simulates spam detection using a keyword-based machine learning approach. Users can paste email content and instantly see if it is classified as **SPAM** or **HAM (legitimate)**. Built with **HTML, Tailwind CSS, and JavaScript**.
+SecureMail Analyzer is a real-time email content analysis tool that detects spam emails using a Machine Learning (ML) model trained on labeled email datasets. The system analyzes message content and predicts whether an email is SPAM or HAM (legitimate).
 
----
+Built with Python (Scikit-learn, Flask) for the backend and HTML, Tailwind CSS, and JavaScript for the frontend, this project demonstrates both ML implementation and web integration in a simple, educational, and visually interactive way.
 
-## Features
+🚀 Features
 
-- **Real-time Spam Detection**: Classifies email content as SPAM or HAM based on keywords.
-- **Dynamic Result Display**: Shows predictions with confidence scores, color-coded alerts, and icons.
-- **Interactive UI**: Smooth animations, mobile-responsive design, and a fixed navigation header.
-- **Educational Demo**: Demonstrates email classification using a simple simulated ML model.
-- **Customizable Keywords**: Keyword list can be expanded for better detection.
+Machine Learning-Based Detection: Uses trained ML algorithms to classify email content as SPAM or HAM.
+High Accuracy: Achieved an accuracy of 96% on the test dataset using a Multinomial Naive Bayes model.
+Real-Time Prediction: Instantly analyzes pasted email content and displays classification results.
+Dynamic Result Visualization: Displays predictions with color-coded alerts, confidence scores, and icons.
+Responsive UI: Built with Tailwind CSS for smooth animations and mobile-friendly layout.
+Customizable Model: Supports retraining with new data for improved accuracy.
 
----
 
-## Tech Stack
+🧠 Machine Learning Model
 
-- **Front-End**: HTML, Tailwind CSS, JavaScript  
-- **Icons**: Lucide Icons  
-- **Design**: Responsive, mobile-friendly layout with animations  
-- **Demo ML Logic**: Keyword-based spam detection (mock)
+Algorithm Used: Multinomial Naive Bayes
+Libraries: Scikit-learn, Pandas, NumPy, Joblib
+Dataset: emails.csv (contains labeled email text for spam/ham classification)
+Accuracy: ~96% on test data
+Training File: train_model.py
+Prediction File: predict.py
 
----
 
-## How to Use
+Model Workflow
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Shikha18Shukla/Spam_email_detector/tree/main
+Data Preprocessing: Cleaned and tokenized email text.
+Feature Extraction: Used TF-IDF vectorization for text representation.
+Model Training: Trained a Multinomial Naive Bayes classifier.
+Model Saving: Saved the trained model using Joblib for deployment.
+Real-Time Prediction: Integrated with Flask to predict user input in real time.
 
+💻 Tech Stack
+Frontend: HTML, Tailwind CSS, JavaScript
+Backend: Python (Flask)
+Machine Learning: Scikit-learn, Pandas, NumPy
+Icons: Lucide Icons
+Model Storage: Joblib
+
+🧩 Project Structure
+Spam_Email_Detector/
+│
+├── app/
+│   ├── app.py                 
+│   ├── predict.py             
+│   ├── train_model.py        
+│   └── __init__.py
+│
+├── data/
+│   └── emails.csv           
+│
+├── models/
+│   └── email_model.joblib    
+│
+├── template/
+│   └── index.html            
+│
+├── requirements.txt
+├── README.md
+└── .gitignore
+
+
+⚙️ How to Run
+Clone the repository:
+git clone https://github.com/Shikha18Shukla/Spam_email_detector.git
+cd Spam_email_detector
+
+
+📊 Example Predictions
+Email Example	Prediction	Confidence
+"Congratulations! You’ve won a $1000 gift card!"	SPAM	98%
+"Reminder: Your meeting is scheduled for tomorrow at 10am."	HAM	94%
+"Buy cheap meds online, limited-time offer!"	SPAM	97%
+
+🌟 Future Improvements
+Integrate advanced NLP models (e.g., BERT, Logistic Regression) for higher precision.
+Add email header and sender-based feature analysis.
+Deploy using Streamlit or a cloud platform (e.g., Render, Heroku).
+
+Author: Shikha Shukla
+GitHub: Shikha18Shukla
 
 
 ##Frontend :
