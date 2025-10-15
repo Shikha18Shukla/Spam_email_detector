@@ -1,10 +1,10 @@
-🛡️ SecureMail Analyzer - Spam Email Detector
+##🛡️ SecureMail Analyzer - Spam Email Detector
 
 SecureMail Analyzer is a real-time email content analysis tool that detects spam emails using a Machine Learning (ML) model trained on labeled email datasets. The system analyzes message content and predicts whether an email is SPAM or HAM (legitimate).
 
 Built with Python (Scikit-learn, Flask) for the backend and HTML, Tailwind CSS, and JavaScript for the frontend, this project demonstrates both ML implementation and web integration in a simple, educational, and visually interactive way.
 
-🚀 Features
+#🚀 Features
 
 Machine Learning-Based Detection: Uses trained ML algorithms to classify email content as SPAM or HAM.
 High Accuracy: Achieved an accuracy of 96% on the test dataset using a Multinomial Naive Bayes model.
@@ -14,7 +14,7 @@ Responsive UI: Built with Tailwind CSS for smooth animations and mobile-friendly
 Customizable Model: Supports retraining with new data for improved accuracy.
 
 
-🧠 Machine Learning Model
+#🧠 Machine Learning Model
 
 Algorithm Used: Multinomial Naive Bayes
 Libraries: Scikit-learn, Pandas, NumPy, Joblib
@@ -24,7 +24,7 @@ Training File: train_model.py
 Prediction File: predict.py
 
 
-Model Workflow
+#Model Workflow
 
 Data Preprocessing: Cleaned and tokenized email text.
 Feature Extraction: Used TF-IDF vectorization for text representation.
@@ -32,14 +32,14 @@ Model Training: Trained a Multinomial Naive Bayes classifier.
 Model Saving: Saved the trained model using Joblib for deployment.
 Real-Time Prediction: Integrated with Flask to predict user input in real time.
 
-💻 Tech Stack
+#💻 Tech Stack
 Frontend: HTML, Tailwind CSS, JavaScript
 Backend: Python (Flask)
 Machine Learning: Scikit-learn, Pandas, NumPy
 Icons: Lucide Icons
 Model Storage: Joblib
 
-🧩 Project Structure
+##🧩 Project Structure
 Spam_Email_Detector/
 │
 ├── app/
@@ -62,22 +62,17 @@ Spam_Email_Detector/
 └── .gitignore
 
 
-⚙️ How to Run
+#⚙️ How to Run
 Clone the repository:
 git clone https://github.com/Shikha18Shukla/Spam_email_detector.git
 cd Spam_email_detector
 
 
-📊 Example Predictions
+#📊 Example Predictions
 Email Example	Prediction	Confidence
 "Congratulations! You’ve won a $1000 gift card!"	SPAM	98%
 "Reminder: Your meeting is scheduled for tomorrow at 10am."	HAM	94%
 "Buy cheap meds online, limited-time offer!"	SPAM	97%
-
-🌟 Future Improvements
-Integrate advanced NLP models (e.g., BERT, Logistic Regression) for higher precision.
-Add email header and sender-based feature analysis.
-Deploy using Streamlit or a cloud platform (e.g., Render, Heroku).
 
 Author: Shikha Shukla
 GitHub: Shikha18Shukla
